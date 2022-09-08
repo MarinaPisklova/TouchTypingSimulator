@@ -1,0 +1,36 @@
+.black {
+  color: black;
+}
+
+.gray {
+  color: gray;
+}
+
+.active {
+  visibility: visible;
+}
+
+.inactive {
+  visibility: hidden;
+}
+
+.inputBox {
+  position: relative;
+}
+
+.label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.input {
+  opacity: 0;
+}
+
+.inputBox{
+  /* overflow: scroll; */
+  margin-bottom: 50px;
+}
