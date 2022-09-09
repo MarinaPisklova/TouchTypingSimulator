@@ -1,32 +1,27 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect} from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from "../store/reducer";
 import axios from "axios";
-import { setText, setUserText } from './../store/actions';
+import { setText, setUserText, setErrors, setClicks, setStartTime, resetResults } from './../store/actions';
 import { Button } from "../Button";
-import styles from "./TextFormContainer.module.css";
+import { TextForm } from "../TextForm/TextForm";
+import { ResultsBox } from "../ResultsBox";
 
 
 export function TextFormContainer() {
   const text = useSelector<RootState, string>(state => state.text);
   const userText = useSelector<RootState, string>(state => state.userText);
+  const errors = useSelector<RootState, number>(state => state.errors);
+  const clicks = useSelector<RootState, number>(state => state.clicks);
   const dispatch = useDispatch();
-  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     getText();
   }, [])
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      isVisible ? setIsVisible(false) : setIsVisible(true);
-    }, 500);
-
-    return () => clearTimeout(timer);
-  })
-
   function handleClickButton() {
     getText();
+    dispatch(resetResults());
   }
 
   function handleChangeInput(event: ChangeEvent<HTMLInputElement>) {
@@ -35,11 +30,20 @@ export function TextFormContainer() {
     const userTextLength = lettersUserText.length;
 
     if (lettersText[0] == lettersUserText[userTextLength - 1]) {
-      const newText = text.slice(1);
-      console.log(newText)
+      if (clicks == 0) {
+        dispatch(setStartTime((new Date()).getTime()));
+      }
 
-      dispatch(setText(newText));
+      dispatch(setText(text.slice(1)));
       dispatch(setUserText(userText + lettersUserText[userTextLength - 1]));
+      dispatch(setClicks(clicks + 1))
+
+      if (lettersText.length == 1) {
+        getText();
+      }
+    }
+    else {
+      dispatch(setErrors(errors + 1));
     }
   }
 
@@ -57,18 +61,8 @@ export function TextFormContainer() {
 
   return (
     <>
-      <div className={styles.inputBox} >
-        <input className={styles.input} type="text" name="text" id="text" onChange={handleChangeInput} autoFocus/>
-        <label htmlFor="text" className={styles.label}>
-          <span className={styles.black}>{userText}</span>
-          <span className={isVisible ? styles.active : styles.inactive}>|</span>
-          <span className={styles.gray}>{text}</span>
-        </label>
-      </div>
-
-      {/* <TextForm text={inputValue} handleChange={handleChangeInput} /> */}
-      {/* <h6>{inputValue}</h6>
-      <h6>{userText}</h6> */}
+      <TextForm handleChange={handleChangeInput} />
+      <ResultsBox />
       <Button type={"button"} handleClick={handleClickButton}> Новый текст</Button>
     </>
   )

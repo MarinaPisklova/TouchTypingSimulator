@@ -6,16 +6,9 @@
   color: gray;
 }
 
-.active {
-  visibility: visible;
-}
-
-.inactive {
-  visibility: hidden;
-}
-
 .inputBox {
   position: relative;
+  margin-bottom: 50px;
 }
 
 .label {
@@ -28,9 +21,4 @@
 
 .input {
   opacity: 0;
-}
-
-.inputBox{
-  /* overflow: scroll; */
-  margin-bottom: 50px;
 }
