@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store/reducer";
-import { setSpeed } from './../store/actions';
+import { RootState } from "../../store/reducer";
+import { setSpeed } from '../../store/actions';
 
-export function Speed() {
+export function DynamicSpeedResult() {
   const clicks = useSelector<RootState, number>(state => state.clicks);
   const startTime = useSelector<RootState, number>(state => state.startTime);
   const speed = useSelector<RootState, number>(state => state.speed);

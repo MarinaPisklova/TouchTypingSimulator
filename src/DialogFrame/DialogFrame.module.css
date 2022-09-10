@@ -1,14 +1,20 @@
-.results{
+.frame {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  padding: 30px 40px;
+  background: #62D0DF;
+  border-radius: 5%;
 }
 
-.resultsBox{
+.title {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.wrapper{
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 40px;
+  justify-content: center;
 }

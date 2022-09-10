@@ -4,31 +4,33 @@
   margin-right: auto;
   padding: 5px 20px;
   border: 0;
-  background-color: #007bff;
-  border-color: #007bff;
+
+  background: #F9B640;
+  border-color: #F9B640;
   border-radius: 5px;
+  font-weight: bold;
   color: #fff;
   cursor: pointer;
 }
 
 .button:hover {
-  background-color: #0069d9;
-  border-color: #0062cc;
+  background-color: #bd811b;
+  border-color: #bd811b;
 }
 
 button:active {
-  background-color: #0062cc;
-  border-color: #005cbf;
+  background-color: #bd811b;
+  border-color: #744c07;
 }
 
 .button:focus {
-  box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 50%);
+  box-shadow: 0 0 0 0.2rem #bd811b;
 }
 
 .button:disabled {
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: #bd811b;
+  border-color: #bd811b;
   opacity: .45;
   cursor: default;
 }

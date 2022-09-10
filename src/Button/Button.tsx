@@ -6,11 +6,12 @@ interface IPropsButton {
   disabled?: boolean;
   children: React.ReactNode;
   handleClick?: () => void;
+  autofocus?: boolean;
 }
 
 export function Button(props: IPropsButton) {
   return (
-    <button type={props.type} disabled={props.disabled} className={styles.button} onClick={props.handleClick}>
+    <button autoFocus={props.autofocus} type={props.type} disabled={props.disabled} className={styles.button} onClick={props.handleClick}>
       {props.children}
     </button>
   )

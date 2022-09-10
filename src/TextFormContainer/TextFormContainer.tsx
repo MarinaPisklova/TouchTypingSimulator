@@ -1,30 +1,30 @@
-import React, { ChangeEvent, useEffect} from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from "../store/reducer";
-import axios from "axios";
-import { setText, setUserText, setErrors, setClicks, setStartTime, resetResults } from './../store/actions';
-import { Button } from "../Button";
+import { RootState, textRequestAsync } from "../store/reducer";
+import { setText, setUserText, setClicks, setStartTime, setMisprints, setIsDoneTask } from './../store/actions';
 import { TextForm } from "../TextForm/TextForm";
 import { ResultsBox } from "../ResultsBox";
+import { ThunkDispatch } from "redux-thunk";
+import { AnyAction } from "redux";
+import { MisprintsResult } from "../ResultsBox/MisprintsResult";
+import { DynamicSpeedResult } from "../ResultsBox/DynamicSpeedResult";
 
+type AppDispatch = ThunkDispatch<RootState, any, AnyAction>;
 
 export function TextFormContainer() {
   const text = useSelector<RootState, string>(state => state.text);
   const userText = useSelector<RootState, string>(state => state.userText);
-  const errors = useSelector<RootState, number>(state => state.errors);
+  const misprints = useSelector<RootState, number>(state => state.misprints);
   const clicks = useSelector<RootState, number>(state => state.clicks);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    getText();
+    if (!text) {
+      dispatch(textRequestAsync());
+    }
   }, [])
 
-  function handleClickButton() {
-    getText();
-    dispatch(resetResults());
-  }
-
-  function handleChangeInput(event: ChangeEvent<HTMLInputElement>) {
+  function handleChangeInput(event: ChangeEvent<HTMLInputElement>): void {
     const lettersText = text.split('');
     const lettersUserText = event.target.value.split('');
     const userTextLength = lettersUserText.length;
@@ -36,34 +36,24 @@ export function TextFormContainer() {
 
       dispatch(setText(text.slice(1)));
       dispatch(setUserText(userText + lettersUserText[userTextLength - 1]));
-      dispatch(setClicks(clicks + 1))
+      dispatch(setClicks(clicks + 1));
 
       if (lettersText.length == 1) {
-        getText();
+        dispatch(setIsDoneTask(true));
       }
     }
     else {
-      dispatch(setErrors(errors + 1));
+      dispatch(setMisprints(misprints + 1));
     }
-  }
-
-  function getText() {
-    axios.get("https://baconipsum.com/api/?type=meat-and-filler&sentences=1&format=text")
-      .then((resp) => {
-        const newText = resp.data;
-        dispatch(setText(newText));
-        dispatch(setUserText(""));
-      })
-      .catch((error) => {
-        console.log(error);
-      })
   }
 
   return (
     <>
+      <ResultsBox>
+        <MisprintsResult />
+        <DynamicSpeedResult />
+      </ResultsBox>
       <TextForm handleChange={handleChangeInput} />
-      <ResultsBox />
-      <Button type={"button"} handleClick={handleClickButton}> Новый текст</Button>
     </>
   )
 }

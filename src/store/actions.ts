@@ -19,13 +19,13 @@ export const setUserText: ActionCreator<SetUserTextAction> = (userText: string) 
 )
 
 
-export const SET_ERRORS = "SET_ERRORS";
-export type SetErrorsAction = {
-  type: typeof SET_ERRORS;
-  errors: number;
+export const SET_MISPRINTS = "SET_MISPRINTS";
+export type SetMisprintsAction = {
+  type: typeof SET_MISPRINTS;
+  misprints: number;
 }
-export const setErrors: ActionCreator<SetErrorsAction> = (errors) => (
-  { type: SET_ERRORS, errors }
+export const setMisprints: ActionCreator<SetMisprintsAction> = (misprints) => (
+  { type: SET_MISPRINTS, misprints }
 )
 
 
@@ -62,4 +62,40 @@ export type SetSpeedAction = {
 }
 export const setSpeed: ActionCreator<SetSpeedAction> = (speed) => (
   { type: SET_SPEED, speed }
+)
+
+
+export const TEXT_REQUEST = "TEXT_REQUEST";
+export type TextRequestAction = {
+  type: typeof TEXT_REQUEST;
+}
+export const textRequest: ActionCreator<TextRequestAction> = () => (
+  { type: TEXT_REQUEST}
+)
+
+export const TEXT_REQUEST_ERROR = "TEXT_REQUEST_ERROR";
+export type TextRequestErrorAction = {
+  type: typeof TEXT_REQUEST_ERROR;
+  error: string;
+}
+export const textRequestError: ActionCreator<TextRequestErrorAction> = (error) => (
+  { type: TEXT_REQUEST_ERROR, error}
+)
+
+export const TEXT_REQUEST_SUCCESS = "TEXT_REQUEST_SUCCESS";
+export type TextRequestSuccessAction = {
+  type: typeof TEXT_REQUEST_SUCCESS;
+  text: string;
+}
+export const textRequestSuccess: ActionCreator<TextRequestSuccessAction> = (text) => (
+  { type: TEXT_REQUEST_SUCCESS, text}
+)
+
+export const SET_IS_DONE_TASK = "SET_IS_DONE_TASK";
+export type SetIsDoneTaskAction = {
+  type: typeof SET_IS_DONE_TASK;
+  isDoneTask: boolean;
+}
+export const setIsDoneTask: ActionCreator<SetIsDoneTaskAction> = (isDoneTask) => (
+  { type: SET_IS_DONE_TASK, isDoneTask}
 )

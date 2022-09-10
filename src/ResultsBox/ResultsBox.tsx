@@ -1,16 +1,17 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { Speed } from "../Speed";
-import { RootState } from "../store/reducer";
 import styles from "./ResultBox.module.css";
 
-export function ResultsBox() {
-  const errors = useSelector<RootState, number>(state => state.errors);
+interface IResultBoxProps {
+  children: React.ReactNode;
+}
 
+export function ResultsBox(props: IResultBoxProps) {
   return (
     <div className={styles.results}>
-      <span>{errors} ошибок </span>
-      <Speed/>
+      <h6>Ваши результаты</h6>
+      <div className={styles.resultsBox}>
+        {props.children}
+      </div>
     </div>
   )
 }
