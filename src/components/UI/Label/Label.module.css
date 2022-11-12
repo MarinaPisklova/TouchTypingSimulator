@@ -1,0 +1,15 @@
+.label {
+  width: 80%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 20px;
+  z-index: 10;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 10px;
+  border: 1px solid white;
+  background-color: white;
+}

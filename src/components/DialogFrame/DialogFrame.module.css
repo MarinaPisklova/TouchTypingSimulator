@@ -1,0 +1,20 @@
+.frame {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 40px;
+  background: #30a6b6;
+  border-radius: 5%;
+}
+
+.title {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

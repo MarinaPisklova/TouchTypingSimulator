@@ -1,6 +1,8 @@
 import { ResetResultsAction, RESET_RESULTS, SetClicksAction, SetIsDoneTaskAction, SetMisprintsAction, SetSpeedAction, SetStartTimeAction, SetTextAction, setUserText, SetUserTextAction, SET_CLICKS, SET_IS_DONE_TASK, SET_MISPRINTS, SET_SPEED, SET_STARTTIME, SET_TEXT, SET_USERTEXT, textRequest, TextRequestAction, textRequestError, TextRequestErrorAction, textRequestSuccess, TextRequestSuccessAction, TEXT_REQUEST, TEXT_REQUEST_ERROR, TEXT_REQUEST_SUCCESS } from "./actions";
-import { Reducer, ThunkAction } from '@reduxjs/toolkit';
-import axios from "axios";
+import { AnyAction, Reducer, ThunkAction, ThunkDispatch } from '@reduxjs/toolkit';
+import APIService from './../API/APIService';
+
+export type AppDispatch = ThunkDispatch<RootState, any, AnyAction>;
 
 export type RootState = {
   text: string;
@@ -115,7 +117,7 @@ export const rootReducer: Reducer<RootState, MyAction> = (state = initialState, 
 
 export const textRequestAsync = (): ThunkAction<void, RootState, unknown, MyAction> => (dispatch, getState) => {
   dispatch(textRequest());
-  axios.get("https://baconipsum.com/api/?type=meat-and-filler&sentences=1&format=text")
+  APIService.getText()
     .then((resp) => {
       const newText = resp.data;
       dispatch(textRequestSuccess(newText));

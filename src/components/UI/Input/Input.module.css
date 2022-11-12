@@ -1,0 +1,9 @@
+.input:focus + label {
+  border-color: #30a6b6;
+}
+
+.input {
+  position: absolute;
+  top: 0;
+  opacity: 0;
+}

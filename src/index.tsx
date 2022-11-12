@@ -1,16 +1,10 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
-import { Provider } from 'react-redux';
-import { Content } from './Content';
-import { Header } from './Header';
-import store from './store/store';
+import App from './components/App/App';
 
 window.addEventListener('load', () => {
     ReactDom.render(
-        <Provider store={store}>
-            <Header />
-            <Content />
-        </Provider>,
+        <App/>,
         document.getElementById("root")
     );
 })
