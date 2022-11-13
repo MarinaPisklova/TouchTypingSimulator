@@ -12,7 +12,7 @@ export function InputText() {
     <>
       <span className={styles.userText}>{userText}</span>
       <Cursor />
-      <span className={styles.text}>{text}</span>
+      <span className={styles.text}>{text.toLowerCase()}</span>
     </>
   )
 }

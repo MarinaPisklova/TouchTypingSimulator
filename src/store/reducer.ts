@@ -1,4 +1,4 @@
-import { ResetResultsAction, RESET_RESULTS, SetClicksAction, SetIsDoneTaskAction, SetMisprintsAction, SetSpeedAction, SetStartTimeAction, SetTextAction, setUserText, SetUserTextAction, SET_CLICKS, SET_IS_DONE_TASK, SET_MISPRINTS, SET_SPEED, SET_STARTTIME, SET_TEXT, SET_USERTEXT, textRequest, TextRequestAction, textRequestError, TextRequestErrorAction, textRequestSuccess, TextRequestSuccessAction, TEXT_REQUEST, TEXT_REQUEST_ERROR, TEXT_REQUEST_SUCCESS } from "./actions";
+import { ResetResultsAction, RESET_RESULTS, SetClicksAction, SetIsDoneTaskAction, SetKeydownNameAction, SetMisprintsAction, SetSpeedAction, SetStartTimeAction, SetTextAction, setUserText, SetUserTextAction, SET_CLICKS, SET_IS_DONE_TASK, SET_KEYDOWN_NAME, SET_MISPRINTS, SET_SPEED, SET_STARTTIME, SET_TEXT, SET_USERTEXT, textRequest, TextRequestAction, textRequestError, TextRequestErrorAction, textRequestSuccess, TextRequestSuccessAction, TEXT_REQUEST, TEXT_REQUEST_ERROR, TEXT_REQUEST_SUCCESS } from "./actions";
 import { AnyAction, Reducer, ThunkAction, ThunkDispatch } from '@reduxjs/toolkit';
 import APIService from './../API/APIService';
 
@@ -14,6 +14,10 @@ export type RootState = {
   loadingText: boolean;
   error: string;
   isDoneTask: boolean;
+  keydown: {
+    name: string;
+    code: string;
+  }
 }
 
 export const initialState: RootState = {
@@ -26,6 +30,10 @@ export const initialState: RootState = {
   loadingText: false,
   error: "",
   isDoneTask: false,
+  keydown: {
+    name: "",
+    code: "",
+  }
 }
 
 type MyAction =
@@ -39,7 +47,8 @@ type MyAction =
   TextRequestAction |
   TextRequestErrorAction |
   TextRequestSuccessAction |
-  SetIsDoneTaskAction;
+  SetIsDoneTaskAction | 
+  SetKeydownNameAction;
 
 export const rootReducer: Reducer<RootState, MyAction> = (state = initialState, action) => {
   switch (action.type) {
@@ -109,6 +118,14 @@ export const rootReducer: Reducer<RootState, MyAction> = (state = initialState, 
         userText: "",
         isDoneTask: false,
         loadingText: false,
+      }
+    case SET_KEYDOWN_NAME:
+      return {
+        ...state,
+        keydown: {
+          name: action.name,
+          code: action.code,
+        }
       }
     default:
       return state;

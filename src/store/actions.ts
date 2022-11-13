@@ -70,7 +70,7 @@ export type TextRequestAction = {
   type: typeof TEXT_REQUEST;
 }
 export const textRequest: ActionCreator<TextRequestAction> = () => (
-  { type: TEXT_REQUEST}
+  { type: TEXT_REQUEST }
 )
 
 export const TEXT_REQUEST_ERROR = "TEXT_REQUEST_ERROR";
@@ -79,7 +79,7 @@ export type TextRequestErrorAction = {
   error: string;
 }
 export const textRequestError: ActionCreator<TextRequestErrorAction> = (error) => (
-  { type: TEXT_REQUEST_ERROR, error}
+  { type: TEXT_REQUEST_ERROR, error }
 )
 
 export const TEXT_REQUEST_SUCCESS = "TEXT_REQUEST_SUCCESS";
@@ -88,7 +88,7 @@ export type TextRequestSuccessAction = {
   text: string;
 }
 export const textRequestSuccess: ActionCreator<TextRequestSuccessAction> = (text) => (
-  { type: TEXT_REQUEST_SUCCESS, text}
+  { type: TEXT_REQUEST_SUCCESS, text }
 )
 
 export const SET_IS_DONE_TASK = "SET_IS_DONE_TASK";
@@ -97,5 +97,16 @@ export type SetIsDoneTaskAction = {
   isDoneTask: boolean;
 }
 export const setIsDoneTask: ActionCreator<SetIsDoneTaskAction> = (isDoneTask) => (
-  { type: SET_IS_DONE_TASK, isDoneTask}
+  { type: SET_IS_DONE_TASK, isDoneTask }
+)
+
+
+export const SET_KEYDOWN_NAME = "SET_KEYDOWN_NAME";
+export type SetKeydownNameAction = {
+  type: typeof SET_KEYDOWN_NAME;
+  name: string;
+  code: string;
+}
+export const setKeydownName: ActionCreator<SetKeydownNameAction> = (name, code) => (
+  { type: SET_KEYDOWN_NAME, name, code }
 )

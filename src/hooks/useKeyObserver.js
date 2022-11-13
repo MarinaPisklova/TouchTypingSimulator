@@ -1,17 +1,16 @@
 import { useState, useLayoutEffect } from "react";
+import { useDispatch } from 'react-redux';
+import { setKeydownName } from "../store/actions";
 
 export const useKeyObserver = () => {
-  const [sign, setSign] = useState("");
+  const dispatch = useDispatch();
 
   useLayoutEffect(() => {
-    function updateSign(event) {
-      setSign(event.key)
+    function updateName(event) {
+      dispatch(setKeydownName(event.key, event.code))
     }
 
-    window.addEventListener("keydown", updateSign);
-
-    return () => window.removeEventListener("resize", updateSign);
+    window.addEventListener("keydown", updateName);
+    return () => window.removeEventListener("resize", updateName);
   }, []);
-
-  return sign;
 };

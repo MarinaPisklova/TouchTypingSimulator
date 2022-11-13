@@ -1,6 +1,6 @@
 .key{
-  width: 40px;
   height: 40px;
+  padding: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,6 +20,14 @@
   background-color: red;
 }
 
-.specialKey{
-  width: 70px;
+.simple{
+  min-width: 40px;
+}
+
+.medium{
+  min-width: 70px;
+}
+
+.big{
+  min-width: 250px;
 }
