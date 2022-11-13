@@ -3,6 +3,7 @@ import styles from './Key.module.css';
 import { useKeyObserver } from './../../../hooks/useKeyObserver';
 import { useSelector } from 'react-redux';
 import { RootState } from "../../../store/reducer";
+import { getShiftForKey } from './../../../utils/matchKeyToShift';
 
 interface IKey {
   name: string;
@@ -18,9 +19,17 @@ export function Key(props: IKey) {
   const text = useSelector<RootState, string>(state => state.text);
   const misprint = useSelector<RootState, number>(state => state.misprints);
   const sizes = [styles.simple, styles.medium, styles.big];
+  let letter = text[0];
 
   useEffect(() => {
-    if (text[0] == props.name || text[0] == (props.name).toUpperCase()) {
+    if (letter && letter.toLowerCase() == props.name) {
+      setActive(true);
+    }
+    else if (
+      letter && props.name == "Shift" &&
+      letter == letter.toUpperCase() && (letter != " " && letter != ".") &&
+      props.code == getShiftForKey(letter.toLowerCase())
+    ) {
       setActive(true);
     }
     else {
@@ -29,10 +38,19 @@ export function Key(props: IKey) {
   }, [text]);
 
   useEffect(() => {
-    if (text[0] != currentName && currentName == props.name
+    if (letter != currentName && currentName == props.name
       && (props.code ? props.code == currentCode : true)
     ) {
-      setError(true);
+      if (
+        currentName == "Shift" && 
+        letter == letter.toUpperCase() && letter != " " && letter != "." &&
+        currentCode == getShiftForKey(letter.toLowerCase())
+        ) {
+        setError(false);
+      }
+      else {
+        setError(true);
+      }
     }
     else {
       setError(false);

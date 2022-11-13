@@ -16,6 +16,7 @@ export type RootState = {
   isDoneTask: boolean;
   keydown: {
     name: string;
+    prevCode: string;
     code: string;
   }
 }
@@ -32,6 +33,7 @@ export const initialState: RootState = {
   isDoneTask: false,
   keydown: {
     name: "",
+    prevCode: "",
     code: "",
   }
 }
@@ -92,6 +94,11 @@ export const rootReducer: Reducer<RootState, MyAction> = (state = initialState, 
         startTime: 0,
         speed: 0,
         isDoneTask: false,
+        keydown: {
+          name: "",
+          prevCode: "",
+          code: "",
+        }
       }
     case SET_IS_DONE_TASK:
       return {
@@ -124,6 +131,7 @@ export const rootReducer: Reducer<RootState, MyAction> = (state = initialState, 
         ...state,
         keydown: {
           name: action.name,
+          prevCode: state.keydown.code,
           code: action.code,
         }
       }
