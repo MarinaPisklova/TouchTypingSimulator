@@ -1,8 +1,6 @@
 # TouchTypingSimulator
 
-![Preview1](https://user-images.githubusercontent.com/77914131/189495312-2bd995b6-cd56-4331-a9f3-0ade0e24ac21.png)
-![Preview2](https://user-images.githubusercontent.com/77914131/189495317-a429bed2-932c-421d-a904-abf9dcf48502.png)
-
+<img width="599" alt="Preview1" src="https://user-images.githubusercontent.com/77914131/205290094-c7d0d526-6293-494a-8160-8d5c79342aa4.png">
 
 ## Реализована frontend часть тренажера слепой печати.
 Основной функционал сервиса - получение текста через публичные API(https://baconipsum.com/json-api/), отображение набираемого текста в реальном времени,
@@ -14,6 +12,9 @@
 * Redux
 * Bootstrap/CSS
 * Webpack сборка на клиенте
+
+## Сайт приложения
+http://touch-typing.tmweb.ru/
 
 ## Запуск приложения
 npm install
