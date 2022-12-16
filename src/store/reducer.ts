@@ -1,4 +1,4 @@
-import { ResetResultsAction, RESET_RESULTS, SetClicksAction, SetIsDoneTaskAction, SetKeydownNameAction, SetMisprintsAction, SetSpeedAction, SetStartTimeAction, SetTextAction, setUserText, SetUserTextAction, SET_CLICKS, SET_IS_DONE_TASK, SET_KEYDOWN_NAME, SET_MISPRINTS, SET_SPEED, SET_STARTTIME, SET_TEXT, SET_USERTEXT, textRequest, TextRequestAction, textRequestError, TextRequestErrorAction, textRequestSuccess, TextRequestSuccessAction, TEXT_REQUEST, TEXT_REQUEST_ERROR, TEXT_REQUEST_SUCCESS } from "./actions";
+import { ResetResultsAction, RESET_RESULTS, SetClicksAction, SetIsDoneTaskAction, SetKeydownNameAction, SetMisprintsAction, SetSpeedAction, SetStartTimeAction, SetTextAction, setUserText, SetUserTextAction, SET_CLICKS, SET_IS_DONE_TASK, SET_KEYDOWN_NAME, SET_MISPRINTS, SET_SPEED, SET_STARTTIME, SET_TEXT, SET_USERTEXT, textRequest, TextRequestAction, textRequestError, TextRequestErrorAction, TextRequestSagaAction, textRequestSuccess, TextRequestSuccessAction, TEXT_REQUEST, TEXT_REQUEST_ERROR, TEXT_REQUEST_SUCCESS } from "./actions";
 import { AnyAction, Reducer, ThunkAction, ThunkDispatch } from '@reduxjs/toolkit';
 import APIService from './../API/APIService';
 
@@ -50,7 +50,8 @@ type MyAction =
   TextRequestErrorAction |
   TextRequestSuccessAction |
   SetIsDoneTaskAction | 
-  SetKeydownNameAction;
+  SetKeydownNameAction |
+  TextRequestSagaAction;
 
 export const rootReducer: Reducer<RootState, MyAction> = (state = initialState, action) => {
   switch (action.type) {
@@ -152,3 +153,6 @@ export const textRequestAsync = (): ThunkAction<void, RootState, unknown, MyActi
       dispatch(textRequestError(String(error)));
     })
 }
+
+
+ 

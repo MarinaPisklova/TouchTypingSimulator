@@ -8,6 +8,7 @@ import { DynamicSpeedResult } from "../ResultsBox/DynamicSpeedResult";
 import { TextForm } from "../TextForm";
 import { KeyBoard } from './../KeyBoard/KeyBoard';
 import { getShiftForKey } from './../../utils/matchKeyToShift';
+import { textRequestSaga } from './../../store/actions';
 
 export function TextFormContainer() {
   const text = useSelector<RootState, string>(state => state.text);
@@ -21,7 +22,8 @@ export function TextFormContainer() {
 
   useEffect(() => {
     if (!text) {
-      dispatch(textRequestAsync());
+      // dispatch(textRequestAsync());
+      dispatch(textRequestSaga());
     }
   }, [])
 

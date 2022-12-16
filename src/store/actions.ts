@@ -110,3 +110,13 @@ export type SetKeydownNameAction = {
 export const setKeydownName: ActionCreator<SetKeydownNameAction> = (name, code) => (
   { type: SET_KEYDOWN_NAME, name, code }
 )
+
+
+
+export const TEXT_REQUEST_SAGA = "TEXT_REQUEST_SAGA";
+export type TextRequestSagaAction = {
+  type: typeof TEXT_REQUEST_SAGA;
+}
+export const textRequestSaga: ActionCreator<TextRequestSagaAction> = () => (
+  { type: TEXT_REQUEST_SAGA }
+)
